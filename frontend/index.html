@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" name="viewport">
+    <title>FakeTube</title>
+    <script src="https://cdn.jsdelivr.net/riot/3.2/riot+compiler.min.js"></script>
+    <script src="https://cdn.rawgit.com/riot/route/aee3d517/dist/route+tag.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery/3.1.1/jquery.min.js"></script>
+    <script type="riot/tag" src="/list.tag"></script>
+    <script type="riot/tag" src="/new.tag"></script>
+    <script type="riot/tag" src="/edit.tag"></script>
+    <script type="riot/tag" src="/show.tag"></script>
+    <script type="riot/tag" src="/preview.tag"></script>
+    <link href="/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav>
+      <a class="logo" href="/">FakeTube</a>
+      <a class="new" href="/new">Video</a>
+    </nav>
+
+    <router>
+      <route path=""><list></list></route>
+      <route path="new"><new></new></route>
+      <route path="*/edit"><edit></edit></route>
+      <route path="*"><show></show></route>
+    </router>
+
+    <script>
+      window.server = localStorage.server || 'http://localhost:4567/'
+      window.embedly_key = '8c6518fa1a5446e7a760eb035b4e4673'
+      route.base('/')
+      riot.mount('*')
+    </script>
+  </body>
+</html>

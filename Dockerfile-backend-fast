@@ -1,0 +1,15 @@
+FROM ruby:2.3.1
+
+WORKDIR /project
+
+COPY backend-fast/Gemfile .
+COPY backend-fast/Gemfile.lock .
+RUN bundle install
+
+COPY backend-fast/faketube.rb .
+COPY shared/youtube.rb .
+COPY shared/fiber_io.rb .
+
+EXPOSE 4568
+
+CMD ["ruby", "faketube.rb"]

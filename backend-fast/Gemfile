@@ -1,0 +1,4 @@
+﻿source 'https://rubygems.org'
+
+gem 'yt', github: 'sinetris/yt', branch: 'upload_accept_io_streams'
+gem 'eventmachine'

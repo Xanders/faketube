@@ -1,0 +1,38 @@
+version: '2'
+services:
+  backend-simple:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend-simple
+    volumes:
+      - ./backend-simple/faketube.rb:/project/faketube.rb
+      - ./backend-simple/Gemfile:/project/Gemfile
+      - ./backend-simple/Gemfile.lock:/project/Gemfile.lock
+      - ./shared/youtube.rb:/project/youtube.rb
+    ports:
+      - '4567:4567'
+    env_file: ./shared/youtube.env
+
+  backend-fast:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend-fast
+    volumes:
+      - ./backend-fast/faketube.rb:/project/faketube.rb
+      - ./backend-fast/Gemfile:/project/Gemfile
+      - ./backend-fast/Gemfile.lock:/project/Gemfile.lock
+      - ./shared/youtube.rb:/project/youtube.rb
+      - ./shared/fiber_io.rb:/project/fiber_io.rb
+    ports:
+      - '4568:4568'
+    env_file: ./shared/youtube.env
+
+  frontend:
+    image: nginx
+    volumes:
+      - './frontend:/usr/share/nginx/html:ro'
+      - './nginx.conf:/etc/nginx/conf.d/nginx.conf:ro'
+    ports:
+      - '8080:8080'
+    logging:
+      driver: 'none'

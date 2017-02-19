@@ -1,0 +1,16 @@
+FROM ruby:2.3.1
+
+WORKDIR /project
+
+COPY backend-simple/Gemfile .
+COPY backend-simple/Gemfile.lock .
+RUN bundle install
+
+COPY backend-simple/faketube.rb .
+COPY shared/youtube.rb .
+
+ENV RACK_ENV=production
+
+EXPOSE 4567
+
+CMD ["ruby", "faketube.rb"]

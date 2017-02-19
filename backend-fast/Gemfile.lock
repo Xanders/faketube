@@ -1,0 +1,33 @@
+GIT
+  remote: git://github.com/sinetris/yt.git
+  revision: 05126019edea17008fa9d6f16e29957603c0289c
+  branch: upload_accept_io_streams
+  specs:
+    yt (0.25.11)
+      activesupport
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (5.0.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    concurrent-ruby (1.0.4)
+    eventmachine (1.2.2)
+    i18n (0.8.0)
+    minitest (5.10.1)
+    thread_safe (0.3.5)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  eventmachine
+  yt!
+
+BUNDLED WITH
+   1.12.5

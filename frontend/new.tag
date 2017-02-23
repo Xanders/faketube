@@ -46,8 +46,14 @@
       contentType: false,
       processData: false,
       success: function(response) {
-        alert("Your video was uploaded successfully!")
-        if(that.isMounted && !that.refs.file.value && !that.refs.title.value) route(response.id)
+        var redirect = that.isMounted && !that.refs.file.value && !that.refs.title.value
+        if(response.processing) {
+          alert("Your video is in processing now, it will appear in list at few minutes. You can leave the site or watch some other videos fow now.")
+          if(redirect) route('')
+        } else {
+          alert("Your video was uploaded successfully!")
+          if(redirect) route(response.id)
+        }
       },
       error: function() {
         if(that.isMounted) {

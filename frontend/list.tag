@@ -17,13 +17,19 @@
   var that = this
   this.on('route', function() {
     $.getJSON(server).done(function(data) {
-      if(that.isMounted) that.videos = data
-    }).fail(function() {
-      if(that.isMounted) that.error = "Cannot load data from server! :("
-    }).always(function() {
       if(!that.isMounted) return
+      if(data.length) {
+        that.videos = data
+        delete that.note
+      } else {
+        that.note = "There is no videos on the server yet. Welcome to upload one!"
+      }
+    }).fail(function() {
+      if(!that.isMounted) return
+      that.error = "Cannot load data from server! :("
       delete that.note
-      that.update()
+    }).always(function() {
+      if(that.isMounted) that.update()
     })
   })
 </list>

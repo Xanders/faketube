@@ -27,6 +27,39 @@ services:
       - '4568:4568'
     env_file: ./shared/youtube.env
 
+  backend-rails: &backend-rails
+    build:
+      context: .
+      dockerfile: Dockerfile-backend-rails
+    volumes:
+      - ./backend-rails:/project
+    ports:
+      - '3000:3000'
+    links:
+      - backend-rails-db
+      - backend-rails-redis
+    environment:
+      DB_HOST: 'backend-rails-db'
+      REDIS_URL: 'redis://backend-rails-redis:6379/1'
+      RAILS_SERVE_STATIC_FILES: 'true'
+      STATIC_HOST: 'http://localhost:3000'
+    env_file: ./shared/rails.env
+
+  backend-rails-jobs:
+    <<: *backend-rails
+    command: [sidekiq, -q, default, -q, mailers]
+    ports: []
+
+  backend-rails-db:
+    image: postgres
+    ports:
+      - '5432'
+
+  backend-rails-redis:
+    image: redis
+    ports:
+      - '6379'
+
   frontend:
     image: nginx
     volumes:

@@ -42,6 +42,7 @@
       url: server + that.id + '?' + $.param({title: title}),
       method: 'PATCH',
       success: function(response) {
+        if(response.processing) alert("Your video is in processing now, the changes will appear at few minutes.")
         if(that.isMounted) route(that.id)
       },
       error: function() {
@@ -57,5 +58,4 @@
 
     this.note = "Processing..."
   }
-  2+2+2
 </edit>

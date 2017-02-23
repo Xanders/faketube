@@ -3,7 +3,7 @@
   <div class="error" if={error}>{error}</div>
   <virtual if={!video.loading}>
     <div ref="holder"></div>
-    <span ref="watermark">{video.title}</span>
+    <span if={video.title} ref="watermark">{video.title}</span>
     <a ref="edit" href="/{video.id}/edit">Edit</a>
   </virtual>
 
@@ -40,6 +40,10 @@
     [ref="edit"]:hover {
       color: rgb(67, 77, 0);
     }
+
+    video {
+      width: 100%;
+    }
   </style>
 
   this.note = "Loading..."
@@ -64,11 +68,10 @@
       $.getJSON(embedly_url).done(function(data) {
         if(!that.isMounted) return
         that.one('updated', function() {
-          that.refs.holder.innerHTML = data.html
+          that.refs.holder.innerHTML = data.html || '<video src="' + that.video.url + '" controls></video>'
         })
         that.update()
       }).fail(that.fail)
     }).fail(that.fail)
   })
-  2+2+2
 </show>

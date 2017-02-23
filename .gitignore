@@ -1,1 +1,6 @@
 shared/youtube.env
+shared/rails.env
+backend-rails/public/system
+backend-rails/log/**/*
+backend-rails/tmp/**/*
+!backend-rails/**/.keep
